@@ -1,38 +1,51 @@
-# sv
+# Google OAuth Demo
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A demonstration of how to use Google OAuth for authentication and accessing Google Drive files, built with SvelteKit and Tailwind CSS.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Google OAuth authentication
+- Dark mode UI with Tailwind CSS
+- Display user profile information (name, email, profile picture)
+- Fetch and display Google Drive files
 
-```bash
-# create a new project in the current directory
-npx sv create
+## Pages
 
-# create a new project in my-app
-npx sv create my-app
-```
+- `/`: Root page that redirects to `/app` if authenticated, otherwise to `/login`
+- `/login`: Simple login page with a Google login button
+- `/app`: Authenticated page that displays user information and Google Drive files
 
-## Developing
+## Getting Started
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open your browser and navigate to `http://localhost:5173`
 
-```bash
-npm run dev
+## OAuth Configuration
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+The application uses the Google OAuth 2.0 API for authentication. The OAuth flow is as follows:
 
-## Building
+1. User clicks the "Sign in with Google" button on the login page
+2. User is redirected to Google's authentication page
+3. After successful authentication, Google redirects back to the application with an access token
+4. The application uses the access token to fetch user information and Google Drive files
 
-To create a production version of your app:
+The OAuth configuration is stored in the `.env` file:
+- `PUBLIC_GOOGLE_CLIENT_ID`: Your Google OAuth client ID
+
+## Building for Production
+
+To create a production version of the app:
 
 ```bash
 npm run build
 ```
 
 You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
