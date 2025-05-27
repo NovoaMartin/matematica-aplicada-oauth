@@ -1,4 +1,4 @@
-import {PUBLIC_GOOGLE_CLIENT_ID as GOOGLE_CLIENT_ID} from "$env/static/public";
+import {PUBLIC_GOOGLE_CLIENT_ID as GOOGLE_CLIENT_ID, PUBLIC_BASE_URL as BASE_URL} from "$env/static/public";
 
 /**
  * Generates the Google OAuth 2 URL for authentication.
@@ -10,7 +10,7 @@ export function getRedirectUrl() {
     'profile',
     'https://www.googleapis.com/auth/drive.readonly'
   ];
-  const redirectUrl = `http://localhost:5174/auth/google/callback`;
+  const redirectUrl = `${BASE_URL}/auth/google/callback`;
   const params = new URLSearchParams({
     client_id: GOOGLE_CLIENT_ID,
     redirect_uri: redirectUrl,
