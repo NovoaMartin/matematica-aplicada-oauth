@@ -1,29 +1,21 @@
 <script lang="ts">
   import {onMount} from 'svelte';
   import {goto} from '$app/navigation';
-  import {auth, type User} from '$lib/stores/auth';
+  import {authState, isAuthenticated, logout, type User} from '$lib/stores/auth.svelte';
   import {getGoogleDriveFiles} from '$lib/utils';
 
-  let user: User | null = $state(null);
+  let user: User | null = $derived(authState.user);
 
   let driveFiles: any[] | null = $state(null);
   let isLoadingFiles: boolean = $state(false);
   let fileError: string | null= $state(null);
 
   onMount(() => {
-    if (!auth.isAuthenticated()) {
+    if (!isAuthenticated()) {
       goto('/login');
       return;
     }
-
-    return auth.subscribe((value) => {
-      user = value;
-    });
   });
-
-  async function logout() {
-    await auth.logout();
-  }
 
   async function fetchDriveFiles() {
     if (!user) return;

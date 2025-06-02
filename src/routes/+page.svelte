@@ -1,12 +1,12 @@
 <script lang="ts">
   import {onMount} from 'svelte';
   import {goto} from '$app/navigation';
-  import {auth} from '$lib/stores/auth';
+  import {initFromHash, isAuthenticated} from "$lib/stores/auth.svelte";
 
   onMount(async () => {
-    const initialized = await auth.initFromHash();
+    const initialized = await initFromHash();
 
-    if (initialized || auth.isAuthenticated()) {
+    if (initialized || isAuthenticated()) {
       await goto('/app');
     } else {
       await goto('/login');

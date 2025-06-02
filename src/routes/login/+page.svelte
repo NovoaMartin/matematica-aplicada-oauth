@@ -1,11 +1,11 @@
 <script lang="ts">
   import {onMount} from 'svelte';
   import {goto} from '$app/navigation';
-  import {auth} from '$lib/stores/auth';
   import {getRedirectUrl} from '$lib/utils';
+  import {isAuthenticated} from "$lib/stores/auth.svelte";
 
   onMount(() => {
-    if (auth.isAuthenticated()) {
+    if (isAuthenticated()) {
       goto('/app');
     }
   });
